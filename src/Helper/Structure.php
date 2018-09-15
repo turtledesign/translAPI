@@ -21,7 +21,7 @@ trait Structure {
     } catch (SkipException $e) { return $arr; } // Exception is notification that rules exclude this field.
      
 
-    return self::addToArray($arr, $val, $key, @$schema['_key']);
+    return self::addToArray($arr, $val, $key, self::buildPath($key, $schema));
   }
 
 
@@ -96,7 +96,6 @@ trait Structure {
     if (empty($key)) $key = (int) key(array_slice($arr, -1, 1, TRUE)) + 1;
 
     if (! empty($path)) {
-
       $top_ref = & $arr;
 
       foreach (explode('/', $path) as $step) {   // If there is a _key: this/that path value it replaces the $key value entirely.
@@ -112,6 +111,15 @@ trait Structure {
     $top_ref = $val;
 
     return $arr;
+  }
+
+
+  static function buildPath($key, $schema) {
+    if (isset($schema['_key']))       return $schema['_key'];
+    if (! empty($schema['_attr']))    return '_attrs/' . $key; 
+    if (! empty($schema['_content'])) return '_content';
+
+    return NULL;
   }
 
 

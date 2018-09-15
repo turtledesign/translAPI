@@ -1,0 +1,27 @@
+defaults:
+  _trim: true
+  _skip_blank: true
+
+properties:
+  integrationHeader:
+    _include: integrationHeader
+    
+  request:
+    job:
+      tariff:
+        _attr: true
+        _help: From ND Royal Mail domestic and international product guide.
+      pickup:
+        _key: pickupDateTime
+        date:
+          _attr: true
+        time:
+          _attr: true
+
+      country:
+        code:
+          _attr: true
+        name:
+          _content: true
+
+

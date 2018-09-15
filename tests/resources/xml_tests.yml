@@ -1,0 +1,43 @@
+
+attrs_and_content:
+  test:
+    request: 
+      job: 
+        _attrs: { tariff: ABC }
+        pickupDateTime:
+          _attrs: { date: ABC, time: '123' }
+
+      country:  
+        _attrs: { code: GB }
+        _content: 'United Kingdom' 
+
+
+  result:
+    - 
+      name: request
+      value:
+        - 
+          name: job 
+          attributes: { tariff: ABC }
+          value:
+            - 
+              name: pickupDateTime
+              attributes: { date: ABC, time: '123' }
+
+        -
+          name: country
+          attributes: { code: GB }
+          value: 'United Kingdom' 
+  xml_result: |
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE ndxml
+    PUBLIC "-//NETDESPATCH//ENTITIES/Latin"
+           "ndentity.ent">
+    <request>
+     <job tariff="ABC">
+      <pickupDateTime date="ABC" time="123"/>
+     </job>
+     <country code="GB">United Kingdom</country>
+    </request>
+
+

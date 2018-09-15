@@ -1,6 +1,4 @@
-<?php
-
-namespace RoyalMail\Request;
+<?php namespace RoyalMail\Request;
 
 use \Symfony\Component\Yaml\Yaml;
 

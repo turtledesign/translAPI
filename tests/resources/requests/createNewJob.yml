@@ -1,0 +1,18 @@
+valid:
+  request:
+    request: 
+      job:
+        tariff: ABC
+        pickup:
+          date: ABC
+          time: 123
+
+        country:
+          code: GB
+          name: United Kingdom  
+
+
+  expect:
+    request: {}
+
+

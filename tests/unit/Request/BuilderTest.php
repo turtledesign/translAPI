@@ -11,7 +11,6 @@ class Builder extends atoum {
 
   use \RoyalMail\tests\lib\TestDataLoader;
 
-
   function testValueDefaulting() {
     $this->string(ReqBuilder::processSingleProperty(['_default' => 'foo'], @$not_defined))->isEqualTo('foo');
     $this->string(ReqBuilder::processSingleProperty(['_default' => 'bar'], '0'))->isEqualTo('bar'); // Beware.
@@ -44,35 +43,13 @@ class Builder extends atoum {
       $setup = $this->getTestSchema('requests/' . $req_name);
 
       $valid = $setup['valid'];
+      $built = ReqBuilder::build(preg_replace('/_\w+$/', '', $req_name), $valid['request'], $helper);
 
       $this
-        ->array(ReqBuilder::build(preg_replace('/_\w+$/', '', $req_name), $valid['request'], $helper))
+        ->array($built)
         ->isEqualTo($valid['expect']);
     }
   }
-
-
-  function testMultiplePropertyCreation() {
-    $tests = self::getTestConfigs('misc_builder_tests');
-
-    $musi = $tests['multiple_property_single_element'];
-    $this
-      ->array(ReqBuilder::processSchema($musi['schema'], $musi['values']))
-      ->isEqualTo($musi['expect']);
-
-  }
-
-
-  function testCreateShipmentWeight() {
-    $tests = self::getTestConfigs('misc_builder_tests');
-
-    $weight = $tests['weight_from_create_shipment'];
-    
-    $this
-      ->array(ReqBuilder::processSchema($weight['schema'], $weight['values']))
-      ->isEqualTo($weight['expect']);
-  }
-
 
 
   static function getTestConfigs($key) {
