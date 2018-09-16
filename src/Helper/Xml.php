@@ -11,9 +11,10 @@ class Xml {
       'indent_str' => '  ',
       'xml_vers'   => '1.0',
       'xml_i18n'   => 'UTF-8',
-      'dtd_name'   => 'ndxml',
+      'dtd_name'   => 'ndxml', // FIXME: these are hardcoded to netdespatch, but should be from input.
       'dtd_public' => '-//NETDESPATCH//ENTITIES/Latin',
       'dtd_system' => 'ndentity.ent',
+      'wrap'       => ['name' => 'ndxml', 'attributes' => ['version' => '2.0']], 
     ];
 
 
@@ -40,17 +41,19 @@ class Xml {
 
       if (! is_array($v)) $v = ['_content' => $v];
 
-      if (! empty($v['_attrs'])) $node['attributes'] = $v['_attrs'];  
+      if (! empty($v['_attrs'])) $node['attributes'] = array_map(function ($attr) { return (string) $attr; }, $v['_attrs']);  // writeAttribute fails with non-string values.
       
-      if (! empty($v['_content'])) $node['value'] = $v['_content'];
+      if (isset($v['_content'])) $node['value'] = $v['_content'];
       elseif ($children = array_diff_key($v, array_flip(['_attrs']))) {
-        $node['value'] = self::toSabreArray($children);
+        $node['value'] = self::toSabreArray($children); // Need to watch if adding $cfg here ('wrap' will repeat...)
       }
 
       $sabre[] = $node;
     }
 
-    return $sabre; 
+    return (isset($cfg['wrap'])) 
+      ? array_merge($cfg['wrap'], ['value' => $sabre])
+      : $sabre; 
   }
 
 

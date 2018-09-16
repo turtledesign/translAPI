@@ -34,22 +34,35 @@ class Builder extends atoum {
   }
 
 
-  function testValidRequests() {
-    $helper   = new \RoyalMail\Helper\Data(['override_defaults' => ['_disable_includes' => TRUE]]);
-    $requests = glob(RESOURCES_DIR . '/requests/*.yml');
+  function testFullRequest() {
+    $helper  = new \RoyalMail\Helper\Data(['override_defaults' => ['_disable_includes' => FALSE]]);
+    $setup   = $this->getTestSchema('requests/cancelJob');
 
-    foreach ($requests as $req_file) {
-      $req_name    = basename($req_file, '.yml');
-      $setup = $this->getTestSchema('requests/' . $req_name);
+    $valid = $setup['valid'];
+    $built = ReqBuilder::build('cancelJob', $valid['request'], $helper);
 
-      $valid = $setup['valid'];
-      $built = ReqBuilder::build(preg_replace('/_\w+$/', '', $req_name), $valid['request'], $helper);
+    unset($built['request']['trackingUpdate']['trackingDateTime']); // These are generated timestamps, so vary : test elsewhere
 
-      $this
-        ->array($built)
-        ->isEqualTo($valid['expect']);
-    }
+    $this->array($built)->isEqualTo($valid['expect']);
   }
+
+
+  // function testValidRequests() {
+  //   $helper   = new \RoyalMail\Helper\Data(['override_defaults' => ['_disable_includes' => TRUE]]);
+  //   $requests = glob(RESOURCES_DIR . '/requests/*.yml');
+
+  //   foreach ($requests as $req_file) {
+  //     $req_name    = basename($req_file, '.yml');
+  //     $setup = $this->getTestSchema('requests/' . $req_name);
+
+  //     $valid = $setup['valid'];
+  //     $built = ReqBuilder::build(preg_replace('/_\w+$/', '', $req_name), $valid['request'], $helper);
+
+  //     $this
+  //       ->array($built)
+  //       ->isEqualTo($valid['expect']);
+  //   }
+  // }
 
 
   static function getTestConfigs($key) {

@@ -1,4 +1,81 @@
 
+
+cancellation:
+  test:
+    credentials:
+      identity: username
+      password: password
+      language:
+        _attrs:
+          name: ''
+          modifier: en
+    request:
+      _attrs:
+        id: 1
+        function: cancelJob
+      trackingUpdate:
+        uniqueRef: 2z8888
+        code: CAN
+        detail: 'Customer cancelled.'
+        trackingDateTime:
+          _attrs:
+            date: '2018-09-16'
+            time: '18:36:02'
+        carrierCode: ''
+
+  result: 
+    -
+      name: credentials
+      value:
+        -
+          name: identity
+          value: username
+        -
+          name: password
+          value: password
+        -
+          name: language
+          attributes:
+            name: ''
+            modifier: en
+    -
+      name: request
+      attributes:
+        id: '1'
+        function: cancelJob
+      value:
+        -
+          name: trackingUpdate
+          value:
+            - { name: uniqueRef, value: 2z8888 }
+            - { name: code, value: CAN }
+            - { name: detail, value: 'Customer cancelled.' }
+            - { name: trackingDateTime, attributes: { date: '2018-09-16', time: '18:36:02' } }
+            - { name: carrierCode, value: '' }
+
+  xml_result: |
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE ndxml
+    PUBLIC "-//NETDESPATCH//ENTITIES/Latin"
+           "ndentity.ent">
+    <ndxml version="2.0">
+     <credentials>
+      <identity>username</identity>
+      <password>password</password>
+      <language name="" modifier="en"/>
+     </credentials>
+     <request id="1" function="cancelJob">
+      <trackingUpdate>
+       <uniqueRef>2z8888</uniqueRef>
+       <code>CAN</code>
+       <detail>Customer cancelled.</detail>
+       <trackingDateTime date="2018-09-16" time="18:36:02"/>
+       <carrierCode></carrierCode>
+      </trackingUpdate>
+     </request>
+    </ndxml>
+
+
 attrs_and_content:
   test:
     request: 
@@ -33,11 +110,14 @@ attrs_and_content:
     <!DOCTYPE ndxml
     PUBLIC "-//NETDESPATCH//ENTITIES/Latin"
            "ndentity.ent">
-    <request>
-     <job tariff="ABC">
-      <pickupDateTime date="ABC" time="123"/>
-     </job>
-     <country code="GB">United Kingdom</country>
-    </request>
+    <ndxml version="2.0">
+     <request>
+      <job tariff="ABC">
+       <pickupDateTime date="ABC" time="123"/>
+      </job>
+      <country code="GB">United Kingdom</country>
+     </request>
+    </ndxml>
+
 
 

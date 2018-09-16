@@ -1,0 +1,29 @@
+valid:
+  request:
+    credentials:
+      identity: username
+      password: password
+    request: 
+      reference: 2z8888
+      reason: Customer cancelled.
+
+
+
+  expect:
+    credentials:
+      identity: username
+      password: password
+      language:
+        _attrs:
+          name: ''
+          modifier: en
+    request:
+      _attrs:
+        id: 1
+        function: cancelJob
+      trackingUpdate:
+        uniqueRef: 2z8888
+        code: CAN
+        detail: 'Customer cancelled.'
+        carrierCode: ''
+

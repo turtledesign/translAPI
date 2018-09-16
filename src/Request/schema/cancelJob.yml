@@ -1,0 +1,54 @@
+defaults:
+  _trim: true
+
+
+properties:
+  _wrap: 
+    ndxml:
+      version:
+        _attr: true
+        _default: 2
+        
+  credentials:
+    _include: credentials
+
+  request:
+    id:
+      _default: 1
+      _attr: true
+    function:
+      _default: cancelJob
+      _attr: true
+    reference:
+      _key: trackingUpdate/uniqueRef
+      _required: true
+      _validate:
+        Length: { max: 15 }
+    code:
+      _key: trackingUpdate/code
+      _required: true
+      _default: CAN
+      _validate:
+        Length: { max: 6 }
+    reason:
+      _key: trackingUpdate/detail
+      _required: true
+      _validate:
+        Length: { max: 30 }
+    timestamp:
+      _key: trackingUpdate/trackingDateTime
+      date:
+        _attr: true
+        _pre_filter:
+          GenerateDate: 
+            format: 'Y-m-d'
+      time:
+        _attr: true
+        _pre_filter:
+          GenerateDate: 
+            format: 'H:i:s'
+    carrierCode:
+      _key: trackingUpdate/carrierCode
+      _help: required but not used.
+      
+

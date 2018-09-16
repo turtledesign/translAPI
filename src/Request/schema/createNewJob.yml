@@ -3,8 +3,8 @@ defaults:
   _skip_blank: true
 
 properties:
-  integrationHeader:
-    _include: integrationHeader
+  credentials:
+    _include: credentials
     
   request:
     job:

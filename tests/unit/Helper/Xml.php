@@ -6,6 +6,20 @@ use \Symfony\Component\Yaml\Yaml;
 
 class Xml extends atoum {
 
+
+  function testFullCancellation() {
+    $pattern = self::getTestPattern('cancellation');
+    $parsed  = XmlHelper::toSabreArray($pattern['test']);
+
+    $this->array($parsed)->isEqualTo($pattern['result']);
+
+
+    $xml = (new XmlHelper)->toXml($pattern['test']);
+
+    $this->string($xml)->isEqualTo($pattern['xml_result']);
+  }
+
+
   function testSabreConversion() {
     $pattern = self::getTestPattern('attrs_and_content');
     $parsed  = XmlHelper::toSabreArray($pattern['test']);
