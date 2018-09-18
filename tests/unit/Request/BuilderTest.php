@@ -1,6 +1,5 @@
 <?php
 
-
 namespace RoyalMail\tests\unit\Request;
 
 use atoum;

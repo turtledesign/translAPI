@@ -1,0 +1,67 @@
+success_xml: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <ndxml version="2.0">
+    <status code="OK" />
+    <response id="1" function="cancelJob">
+      <status code="OK" />
+    </response>
+  </ndxml>
+
+success_arr:
+  status:
+    _attrs:
+      code: OK
+    _content: null
+  response:
+    _attrs:
+      id: '1'
+      function: cancelJob
+    _content:
+      status:
+        _attrs:
+          code: OK
+        _content: null
+
+
+error_xml: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <ndxml version="2.0">
+    <status code="OK" />
+    <response id="1" function="cancelJob">
+      <niceError>Access Denied (check credentials)</niceError>
+      <status code="ERROR" errorCode="4003"></status>
+    </response>
+  </ndxml>
+
+error_arr:
+  status:
+    _attrs:
+      code: OK
+    _content: null
+  response:
+    _attrs:
+      id: '1'
+      function: cancelJob
+    _content:
+      status:
+        _attrs:
+          code: ERROR
+          errorCode: 4003
+        _content: null
+      niceError:
+        _attrs: []
+        _content: "Access Denied (check credentials)"
+
+
+rejection_xml: |
+  <?xml version="1.0" encoding="UTF-8"?>
+    <ndxml version="2.0">
+      <status code="ERROR" errorCode="1000">Error on line 12: Element type "tariff" must be followed by either attribute specifications, ">" or "/>".</status>
+    </ndxml>
+
+rejection_arr:
+  status:
+    _attrs:
+      code: ERROR
+      errorCode: 1000
+    _content: 'Error on line 12: Element type "tariff" must be followed by either attribute specifications, ">" or "/>".'

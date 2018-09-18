@@ -1,0 +1,27 @@
+properties:
+  META:
+    success:
+      _extract: completedCancelInfo/status/status/statusCode/code
+      _post_filter: { isEqual: 'Cancelled' }
+    
+    security:
+      _include: integrationHeader
+
+    messages:
+      _include: integrationFooter
+
+
+  RESPONSE:
+    status:
+      _extract: completedCancelInfo/status/status/statusCode/code
+
+    updated:
+      _extract: completedCancelInfo/status/validFrom
+      _post_filter: ObjectifyDate
+
+    cancelled_shipments:
+      _extract: completedCancelInfo/completedCancelShipments/shipmentNumber
+      _multiple: true
+
+
+

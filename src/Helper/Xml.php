@@ -3,6 +3,7 @@
 // TODO: Would probably make sense to remove the dependency on Sabre as we're only making use of a very small part of it & could elide out the conversion.
 
 use \Sabre\Xml\Writer;
+use \Sabre\Xml\Service;
 
 class Xml {
 
@@ -33,6 +34,13 @@ class Xml {
   }
 
 
+  function fromXml($xml, $cfg = []) {
+    $service = new Service;
+
+    return self::fromSabreArray((new Service)->parse($xml, $ns = '')); // blank namespace to strip from responses
+  }
+
+
   static function toSabreArray($arr, $cfg = []) {
     $sabre = [];
     
@@ -54,6 +62,22 @@ class Xml {
     return (isset($cfg['wrap'])) 
       ? array_merge($cfg['wrap'], ['value' => $sabre])
       : $sabre; 
+  }
+
+
+  static function fromSabreArray($sabre, $cfg = []) {
+    $arr = [];
+
+    foreach ($sabre as $v) {
+      $node = ['_attrs' => $v['attributes']];
+      $node['_content'] = (is_array($v['value']))
+        ? self::fromSabreArray($v['value'])
+        : $v['value'];
+
+      $arr[preg_replace('/^{}/', '', $v['name'])] = $node;
+    }
+
+    return $arr;
   }
 
 
