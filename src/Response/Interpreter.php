@@ -64,16 +64,21 @@ class Interpreter extends \ArrayObject {
 
 
   function loadResponse($key, $response, $helper = []) {
-    if ($response instanceof \RoyalMail\Exception\ResponseException) return $this->fail($response);
+    if ($response instanceof \RoyalMail\Exception\ResponseException) return $this->connectionError($response);
 
     $this->response_instance = $response;
     $this->response_schema   = self::getResponseSchema($key);
 
     $result = self::build($this->response_schema, $response, $helper);
 
+    // TODO: Hardcoded for NetDespatch.
+    if (! empty($result['ERRORS'])) {
+      $this->errors[] = array_shift($result['ERRORS']['code']) . ' : ' . array_shift($result['ERRORS']['message']);
+    }
+
     if (isset($result['META']['success']))              $this->succeeded     = $result['META']['success'];
     if (isset($result['META']['security']))             $this->security_info = $result['META']['security'];
-    if (isset($result['META']['messages']['errors']))   $this->errors        = $result['META']['messages']['errors'];
+    if (isset($result['META']['messages']['errors']))   $this->errors        = array_merge($this->errors, $result['META']['messages']['errors']);
     if (isset($result['META']['messages']['warnings'])) $this->warnings      = $result['META']['messages']['warnings'];
 
     if (isset($result['RESPONSE']) && is_array($result['RESPONSE'])) $this->exchangeArray($result['RESPONSE']);
@@ -101,7 +106,7 @@ class Interpreter extends \ArrayObject {
     foreach ($schema['properties'] as $k => $map) {
       $built = self::addProperty($built, $map, $k, NULL, [], $helper);
     }
-    
+
     return $built;
   }
 
@@ -113,10 +118,9 @@ class Interpreter extends \ArrayObject {
     } catch (SkipException $e) {
       // pass for now - in some circumstances may be best to create an empty structure (defined in schema).
       return $arr;
-    }
+    } 
 
     if (! empty($schema['_multiple']) && count($stripped = self::stripMeta($schema))) {
-
       $schema = array_diff_key($schema, $stripped); // FIXME: This is patching to bypass the default Structure multi property handling
       unset($schema['_multiple']);                  
       
@@ -135,9 +139,16 @@ class Interpreter extends \ArrayObject {
 
   static function extractValue($response, $map) {
     foreach (explode('/', $map['_extract']) as $step) {
-      if (! isset($response->$step)) throw new SkipException('value not present in response');
+      if (is_object($response)) { // Object, e.g. from SOAP connector.
+        if (! isset($response->$step)) throw new SkipException('value not present in response');
 
-      $response = $response->$step;
+        $response = $response->$step;
+
+      } else { // Array, e.g. from XMLReader conversion
+        if (! isset($response[$step])) throw new SkipException('value not present in response');
+
+        $response = $response[$step];
+      }
     }
 
     if (isset($map['_multiple']) && ! is_array($response)) $response = [$response]; // Single entries for multi-optional values in SOAP elide the array.
@@ -170,7 +181,7 @@ class Interpreter extends \ArrayObject {
 
   function getDebugInfo() { return $this->debug_info; }
   
-  function fail($exception) {
+  function connectionError($exception) {
     $this->errors[] = ['message' => 'API Connection Error: more details available in debug info.'];
 
     $this->debug_info = $exception;

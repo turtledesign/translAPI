@@ -22,7 +22,6 @@ class Xml extends atoum {
 
     $this->array($parsed)->isEqualTo($pattern['result']);
 
-
     $xml = (new XmlHelper)->toXml($pattern['test']);
 
     $this->string($xml)->isEqualTo($pattern['xml_result']);

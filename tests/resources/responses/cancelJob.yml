@@ -22,6 +22,9 @@ success_arr:
           code: OK
         _content: null
 
+success_response:
+  id: 1
+
 
 error_xml: |
   <?xml version="1.0" encoding="UTF-8"?>

@@ -46,22 +46,6 @@ class Builder extends atoum {
   }
 
 
-  // function testValidRequests() {
-  //   $helper   = new \RoyalMail\Helper\Data(['override_defaults' => ['_disable_includes' => TRUE]]);
-  //   $requests = glob(RESOURCES_DIR . '/requests/*.yml');
-
-  //   foreach ($requests as $req_file) {
-  //     $req_name    = basename($req_file, '.yml');
-  //     $setup = $this->getTestSchema('requests/' . $req_name);
-
-  //     $valid = $setup['valid'];
-  //     $built = ReqBuilder::build(preg_replace('/_\w+$/', '', $req_name), $valid['request'], $helper);
-
-  //     $this
-  //       ->array($built)
-  //       ->isEqualTo($valid['expect']);
-  //   }
-  // }
 
 
   static function getTestConfigs($key) {
