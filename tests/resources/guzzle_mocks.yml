@@ -1,0 +1,27 @@
+success:
+  code: 200
+  headers: []
+  body: |
+    <?xml version="1.0" encoding="UTF-8"?>
+    <ndxml version="2.0">
+    <status code="OK" />
+    <response id="1" function="createNewJob">
+    <status code="OK" />
+    <job uniqueRef="4574z1539" jobRef="1539" >
+    <consignment number="XXXXXXXXXXXX" />
+    <reference>Customer Ref</reference>
+    <deadlineDateTime date="2010-09-21" time="16:00:00" />
+    <jobNumber />
+    <labelData>
+    <url>http://........</url>
+    </labelData>
+    </job>
+    </response>
+    </ndxml>
+
+error:
+  code: 404
+  message: 'Error contacting server'
+  body: '<?xml version="1.0" encoding="UTF-8"?><ndxml version="2.0"><status code="ERROR" errorCode="0">Error contacting server</status></ndxml>'
+
+

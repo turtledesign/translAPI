@@ -1,41 +1,31 @@
 properties:
   META:
     success:
-      _extract: completedShipmentInfo/status/status/statusCode/code
-      _post_filter: { isEqual: 'Allocated' }
-    
-    security:
-      _include: integrationHeader
-
-    messages:
-      _include: integrationFooter
+      _extract: status/_attrs/code
+      _post_filter: { isEqual: 'OK' }
 
 
   RESPONSE:
-    status:
-      _extract: completedShipmentInfo/status/status/statusCode/code
+    id:
+      _extract: response/_attrs/id
+    reference:
+      _extract: response/_content/job/_attrs/uniqueRef
+    consignment:
+      _extract: response/_content/job/_content/consignment/_attrs/number
+    label_url:
+      _extract: response/_content/job/_content/labelData/_content/url/_content/
 
-    updated:
-      _extract: completedShipmentInfo/status/validFrom
-      _post_filter: ObjectifyDate
-
-    shipments:
-      _extract: completedShipmentInfo/allCompletedShipments/completedShipments/shipments/shipment
-      _multiple: true
-
-      number:
-        _extract: shipmentNumber
-
-      item_id:
-        _extract: itemID
-
-      status:
-        _extract: status/status/statusCode/code
-
-      updated:
-        _extract: status/validFrom
-        _post_filter: ObjectifyDate
-
+  ERRORS:
+    code:
+      rejection:
+        _extract: response/_content/status/_attrs/errorCode
+      xml:
+        _extract: status/_attrs/errorCode
+    message:
+      rejection:
+        _extract: response/_content/niceError/_content
+      xml:
+        _extract: status/_content
 
 
 
