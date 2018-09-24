@@ -3,12 +3,6 @@ defaults:
 
 
 properties:
-  _wrap: 
-    ndxml:
-      version:
-        _attr: true
-        _default: 2
-        
   credentials:
     _include: credentials
 

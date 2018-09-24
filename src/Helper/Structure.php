@@ -82,7 +82,7 @@ trait Structure {
 
 
   static function validateAndFilter($schema, $val, $defaults, $helper = NULL) {
-    $schema = array_merge((array) $defaults, $schema);
+    $schema = array_merge((array) $defaults, (array) $schema);
     
     $val = self::filter($val, $schema, $type = 'pre', $helper);
 

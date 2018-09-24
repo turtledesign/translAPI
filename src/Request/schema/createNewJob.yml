@@ -5,23 +5,157 @@ defaults:
 properties:
   credentials:
     _include: credentials
-    
-  request:
-    job:
-      tariff:
-        _attr: true
-        _help: From ND Royal Mail domestic and international product guide.
-      pickup:
-        _key: pickupDateTime
-        date:
-          _attr: true
-        time:
-          _attr: true
 
-      country:
-        code:
+  request:
+    id:
+      _default: 1
+      _attr: true
+    function:
+      _default: createNewJob
+      _attr: true
+    styleTag:
+      _attr: true
+      _default: ROYALMAIL
+    responseType:
+      _attr: true
+      _default: labelURL
+
+    job:
+      type:
+        _attr: true
+        _default: HT
+        _help: Here to There - Delivery (HT)
+      tariff:
+        _key: tariff/_attrs/code
+        _help: Allowed Tariff Code (Please refer to the ND Royal Mail Domestic and International Product Guide for available Tariff Codes)
+      service:
+        _key: service/_attrs/code
+        _default: ON
+        _help: Fixed
+      account:
+        _key: account/_attrs/id
+        _help: Your Royal Mail Account ID
+      pickup_date:
+        _key: pickupDateTime/_attrs/date
+        _help: pickup date
+      pickup_time:
+        _key: pickupDateTime/_attrs/time
+        _help: pickup time
+      reference:
+        _help: customer reference
+      costcentre:
+        _help: second customer reference
+      notes:
+        _help: Safe Place Instructions (Safe Place tariffs only)
+      confirmation_email:
+        _key: options/confirmEmail
+        _help: Email address for NetDespatch Confirmation / Accept Email. Multiple email addresses can be entered separated by a space
+      pod_email:
+        _key: options/PODEmail
+        _help: Email address for NetDespatch POD email. Multiple email addresses can be entered separated by a space
+
+      pickup:
+        _key: segment|1
+        number:
           _attr: true
-        name:
-          _content: true
+          _default: 1
+        type: 
+          _attr: true
+          _default: P 
+        order_date:
+          _key: orderDateTime/_attrs/date
+        order_time:
+          _key: orderDateTime/_attrs/time
+        latest_date:
+          _key: deadlineDateTime/_attrs/date
+        latest_time:
+          _key: deadlineDateTime/_attrs/time
+        description:
+          _default: GENERAL GOODS
+        address:
+          company:
+          building:
+          street:
+          locality:
+          town:
+          county:
+          postcode:
+            _key: zip
+          country_code:
+            _key: country/_attrs/ISOCode
+            _default: GB
+          country_name:
+            _key: country/_content
+            _default: United Kingdom
+        contact:
+          name:
+          telephone:
+            _key: telephone/_content
+          extension:
+            _key: telephone/_attrs/ext
+          fax:
+          email:
+          mobile:
+        pieces:
+        weight:
+        width:
+          _key: dimensions/_attrs/x
+        height:
+          _key: dimensions/_attrs/y
+        depth:
+          _key: dimensions/_attrs/z
+        alert_email:
+          _key: alertEmail
+          _default: false
+
+      delivery:
+        _key: segment|2
+        number:
+          _attr: true
+          _default: 2
+        type: 
+          _attr: true
+          _default: D 
+        order_date:
+          _key: orderDateTime/_attrs/date
+        order_time:
+          _key: orderDateTime/_attrs/time
+        description:
+          _default: GENERAL GOODS
+        address:
+          company:
+          building:
+          street:
+          locality:
+          town:
+          county:
+          postcode:
+            _key: zip
+          country_code:
+            _key: country/_attrs/ISOCode
+            _default: GB
+          country_name:
+            _key: country/_content
+            _default: United Kingdom
+        contact:
+          name:
+          telephone:
+            _key: telephone/_content
+          extension:
+            _key: telephone/_attrs/ext
+          fax:
+          email:
+          mobile:
+        pieces:
+        weight:
+        width:
+          _key: dimensions/_attrs/x
+        height:
+          _key: dimensions/_attrs/y
+        depth:
+          _key: dimensions/_attrs/z
+        alert_email:
+          _key: alertEmail
+          _default: false
 
 

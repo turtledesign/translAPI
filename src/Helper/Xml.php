@@ -45,7 +45,7 @@ class Xml {
     $sabre = [];
     
     foreach ($arr as $k => $v) {
-      $node = ['name' => $k];
+      $node = ['name' => preg_replace('/\|\d+$/', '', $k)]; // Required to properly allow multiples of the same XML tag.
 
       if (! is_array($v)) $v = ['_content' => $v];
 

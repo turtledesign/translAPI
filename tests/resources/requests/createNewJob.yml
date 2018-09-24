@@ -1,18 +1,243 @@
 valid:
   request:
+    credentials:
+      identity: username
+      password: password
     request: 
       job:
-        tariff: ABC
+        type: HT
+        tariff: TPN01P
+        account: 1234567890
+        pickup_date: "2014-10-21"
+        pickup_time: "10:20:00"
+        reference: 123/456
+        costcentre: SALES
+        notes: Leave in porch
+        confirmation_email: a@b.com
+        pod_email: b@c.com
         pickup:
-          date: ABC
-          time: 123
+          order_date: "2014-10-21"
+          order_time: "10:20:00"
+          latest_date: "2014-10-21"
+          latest_time: "17:30:00"
+          description: General Boogs
+          address:
+            company: ABC Ltd
+            street: High St
+            town: Marlow
+            postcode: SL7 2UL
+          contact:
+            name: Mr. Jo Smith
+            telephone: 01628 471047
+            extension: 123
+            fax: 441628 470671
+            email: a@b.com
+            mobile: 07771 123123
+          pieces: 1
+          weight: 10
+          width: 5
+          height: 10
+          depth: 20
+          alert_email: false
 
-        country:
-          code: GB
-          name: United Kingdom  
+        delivery:
+          order_date: "2014-10-21"
+          order_time: "10:20:00"
+          description: General Boogs
+          address:
+            company: Biotechnology Sciences Research Council
+            building: Computing Centre
+            street: West Common
+            locality: The Heath
+            town: Harpenden
+            county: Herts
+            postcode: AL5 2JE
+          contact:
+            name: B Smith
+            telephone: 0115 678905
+            extension: 1000
+            fax: 01234 567890
+            email: someone@example.com
+            mobile: 07999 987987
+          pieces: 1
+          weight: 10
+          width: 5
+          height: 10
+          depth: 20
+          alert_email: false
+
 
 
   expect:
-    request: {}
+    credentials:
+      identity: username
+      password: password
+      language:
+        _attrs:
+          name: ''
+          modifier: en
+    request:
+      _attrs:
+        id: 1
+        function: createNewJob
+        styleTag: ROYALMAIL
+        responseType: labelURL
+      job:
+        _attrs:
+          type: HT
+        tariff:
+          _attrs:
+            code: TPN01P
+        service:
+          _attrs:
+            code: 'ON'
+        account:
+          _attrs:
+            id: '1234567890'
+        pickupDateTime:
+          _attrs:
+            date: '2014-10-21'
+            time: '10:20:00'
+        reference: 123/456
+        costcentre: SALES
+        notes: 'Leave in porch'
+        options:
+          confirmEmail: a@b.com
+          PODEmail: b@c.com
+        segment|1:
+          _attrs:
+            number: 1
+            type: P
+          orderDateTime:
+            _attrs: { date: '2014-10-21', time: '10:20:00' }
+          deadlineDateTime:
+            _attrs: { date: '2014-10-21', time: '17:30:00' }
+          description: 'General Boogs'
+          address:
+            company: 'ABC Ltd'
+            street: 'High St'
+            town: Marlow
+            zip: 'SL7 2UL'
+            country: { _attrs: { ISOCode: GB }, _content: 'United Kingdom' }
+          contact:
+            name: 'Mr. Jo Smith'
+            telephone: { _content: '01628 471047', _attrs: { ext: '123' } }
+            fax: '441628 470671'
+            email: a@b.com
+            mobile: '07771 123123'
+          pieces: '1'
+          weight: '10'
+          dimensions:
+            _attrs: { x: '5', 'y': '10', z: '20' }
+          alertEmail: false
+        segment|2:
+          _attrs:
+            number: 2
+            type: D
+          orderDateTime:
+            _attrs: { date: '2014-10-21', time: '10:20:00' }
+          description: 'General Boogs'
+          address:
+            company: 'Biotechnology Sciences Research Council'
+            building: 'Computing Centre'
+            street: 'West Common'
+            locality: 'The Heath'
+            town: Harpenden
+            county: Herts
+            zip: 'AL5 2JE'
+            country: { _attrs: { ISOCode: GB }, _content: 'United Kingdom' }
+          contact:
+            name: 'B Smith'
+            telephone: { _content: '0115 678905', _attrs: { ext: '1000' } }
+            fax: '01234 567890'
+            email: someone@example.com
+            mobile: '07999 987987'
+          pieces: '1'
+          weight: '10'
+          dimensions:
+            _attrs: { x: '5', 'y': '10', z: '20' }
+          alertEmail: false
+
+
+
+  xml: |
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE ndxml
+    PUBLIC "-//NETDESPATCH//ENTITIES/Latin"
+           "ndentity.ent">
+    <ndxml version="2.0">
+     <credentials>
+      <identity>username</identity>
+      <password>password</password>
+      <language name="" modifier="en"/>
+     </credentials>
+     <request id="1" function="createNewJob" styleTag="ROYALMAIL" responseType="labelURL">
+      <job type="HT">
+       <tariff code="TPN01P"/>
+       <service code="ON"/>
+       <account id="1234567890"/>
+       <pickupDateTime date="2014-10-21" time="10:20:00"/>
+       <reference>123/456</reference>
+       <costcentre>SALES</costcentre>
+       <notes>Leave in porch</notes>
+       <options>
+        <confirmEmail>a@b.com</confirmEmail>
+        <PODEmail>b@c.com</PODEmail>
+       </options>
+       <segment number="1" type="P">
+        <orderDateTime date="2014-10-21" time="10:20:00"/>
+        <deadlineDateTime date="2014-10-21" time="17:30:00"/>
+        <description>General Boogs</description>
+        <address>
+         <company>ABC Ltd</company>
+         <street>High St</street>
+         <town>Marlow</town>
+         <zip>SL7 2UL</zip>
+         <country ISOCode="GB">United Kingdom</country>
+        </address>
+        <contact>
+         <name>Mr. Jo Smith</name>
+         <telephone ext="123">01628 471047</telephone>
+         <fax>441628 470671</fax>
+         <email>a@b.com</email>
+         <mobile>07771 123123</mobile>
+        </contact>
+        <pieces>1</pieces>
+        <weight>10</weight>
+        <dimensions x="5" y="10" z="20"/>
+        <alertEmail></alertEmail>
+       </segment>
+       <segment number="2" type="D">
+        <orderDateTime date="2014-10-21" time="10:20:00"/>
+        <description>General Boogs</description>
+        <address>
+         <company>Biotechnology Sciences Research Council</company>
+         <building>Computing Centre</building>
+         <street>West Common</street>
+         <locality>The Heath</locality>
+         <town>Harpenden</town>
+         <county>Herts</county>
+         <zip>AL5 2JE</zip>
+         <country ISOCode="GB">United Kingdom</country>
+        </address>
+        <contact>
+         <name>B Smith</name>
+         <telephone ext="1000">0115 678905</telephone>
+         <fax>01234 567890</fax>
+         <email>someone@example.com</email>
+         <mobile>07999 987987</mobile>
+        </contact>
+        <pieces>1</pieces>
+        <weight>10</weight>
+        <dimensions x="5" y="10" z="20"/>
+        <alertEmail></alertEmail>
+       </segment>
+      </job>
+     </request>
+    </ndxml>
+
+
+
+
 
 

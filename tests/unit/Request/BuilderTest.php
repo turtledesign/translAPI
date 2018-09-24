@@ -5,6 +5,7 @@ namespace RoyalMail\tests\unit\Request;
 use atoum;
 use \RoyalMail\Request\Builder as ReqBuilder;
 use \Symfony\Component\Yaml\Yaml;
+use \RoyalMail\Helper\Xml as XmlHelper;
 
 class Builder extends atoum {
 
@@ -33,7 +34,7 @@ class Builder extends atoum {
   }
 
 
-  function testFullRequest() {
+  function testCancelRequest() {
     $helper  = new \RoyalMail\Helper\Data(['override_defaults' => ['_disable_includes' => FALSE]]);
     $setup   = $this->getTestSchema('requests/cancelJob');
 
@@ -46,6 +47,22 @@ class Builder extends atoum {
   }
 
 
+  function testCreateRequest() {
+    $helper  = new \RoyalMail\Helper\Data(['override_defaults' => ['_disable_includes' => FALSE]]);
+    $setup   = $this->getTestSchema('requests/createNewJob');
+
+    $valid = $setup['valid'];
+    $built = ReqBuilder::build('createNewJob', $valid['request'], $helper);
+
+    $this->array($built)->isEqualTo($valid['expect']);
+
+    $parsed  = XmlHelper::toSabreArray($built);
+
+
+    $xml = (new XmlHelper)->toXml($built);
+
+    $this->string($xml)->isEqualTo($valid['xml']);
+  }
 
 
   static function getTestConfigs($key) {
