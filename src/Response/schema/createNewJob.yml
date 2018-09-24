@@ -13,7 +13,7 @@ properties:
     consignment:
       _extract: response/_content/job/_content/consignment/_attrs/number
     label_url:
-      _extract: response/_content/job/_content/labelData/_content/url/_content/
+      _extract: response/_content/job/_content/labelData/_content/url/_content
 
   ERRORS:
     code:

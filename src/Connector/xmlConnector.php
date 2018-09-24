@@ -2,15 +2,23 @@
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use \RoyalMail\Helper\Xml as XmlHelper;
 
 class xmlConnector extends baseConnector {
 
-
   function request($request, $params = [], $config = []) {
+    $xml = new XmlHelper;
+
+    $request = $xml->toXml($request);
+
     if (! isset($params['client'])) $params['client'] = $this->getTransport();
 
-    return $this->doRequest($request, $params);
+    return $xml->fromXml($this->doRequest($request, $params));
   }
+
+
+
+
 
   function doRequest($request, $params = [], $config = []) {
     try {
