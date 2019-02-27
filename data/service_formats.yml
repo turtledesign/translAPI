@@ -1,8 +1,0 @@
-"F": "Inland Large Letter" 
-"L": "Inland Letter"
-"N": "Inland format Not Applicable"
-"P": "Inland Parcel"
-"E.int": "International Parcel" # CAVEAT: The keys for international formats need suffixing to avoid duplicates.
-"G.int": "International Large Letter"
-"N.int": "International Format Not Applicable"
-"P.int": "International Letter"
