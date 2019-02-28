@@ -11,6 +11,7 @@ use \TranslAPI\Response\Interpreter    as Interpreter;
 
 
 class TranslAPI {
+  protected $instance_root = NULL;
 
   /**
    * Create New
@@ -18,8 +19,17 @@ class TranslAPI {
    * @param array $args This should contain security details and config default overrides.
    * 
    */
-  function __construct($args = []) {
+  function __construct($config_root = '', $args = []) {
+    $args = array_merge([
+      'connector' => 'xml',
+    ], $args);
+
+    $this->instance_root = realpath($config_root);
+    if (! file_exists($this->instance_root)) throw new InvalidArgumentException('The API config directory "' . $this->instance_root . '" is missing');
+
+    $this->instance_args = $args;
   }
+
 
   function processAction($action, $params, $config = []) {
     return  $this->interpretResponse($action,
@@ -43,6 +53,11 @@ class TranslAPI {
 
   function interpretResponse($action, $response) {
     return (new Interpreter)->loadResponse($action, $response, []);
+  }
+
+
+  function getConnector($type = NULL) {
+    // return connector, possibly factoring a DEV mode that will automatically return a mock based one.
   }
 
 
