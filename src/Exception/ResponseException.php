@@ -1,8 +1,8 @@
 <?php
 
-namespace RoyalMail\Exception;
+namespace TranslAPI\Exception;
 
-class ResponseException extends RoyalMailException {
+class ResponseException extends TranslAPIException {
 
   protected $debug_info = [];
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace RoyalMail\tests\unit\Filter;
+namespace TranslAPI\tests\unit\Filter;
 
 use atoum;
 
 class Filters extends atoum {
-  use \RoyalMail\Validator\Validates;
-  use \RoyalMail\Filter\Filters;
+  use \TranslAPI\Validator\Validates;
+  use \TranslAPI\Filter\Filters;
 
 
   function testGBPhoneCleaner() {
@@ -53,7 +53,7 @@ class Filters extends atoum {
 
     $this
       ->exception(function () use ($schema, $helper) { self::filter('foo', $schema, 'pre', $helper); })
-      ->isInstanceOf('\RoyalMail\Exception\StructureSkipFieldException');
+      ->isInstanceOf('\TranslAPI\Exception\StructureSkipFieldException');
   }
 
 

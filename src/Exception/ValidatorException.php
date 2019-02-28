@@ -1,6 +1,6 @@
 <?php
 
-namespace RoyalMail\Exception;
+namespace TranslAPI\Exception;
 
 class ValidatorException extends \InvalidArgumentException {
   

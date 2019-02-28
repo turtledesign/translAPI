@@ -1,6 +1,6 @@
 <?php
 
-namespace RoyalMail\Connector;
+namespace TranslAPI\Connector;
 
   /**
    * This fakes a response by loading the XML from response file for the appropriate request (and postfix, if set).

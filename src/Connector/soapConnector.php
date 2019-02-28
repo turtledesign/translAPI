@@ -1,6 +1,6 @@
 <?php
 
-namespace RoyalMail\Connector;
+namespace TranslAPI\Connector;
 
 ini_set("soap.wsdl_cache_enabled","0"); # This may cause issues with PHP version changes: http://lornajane.net/posts/2015/soapfault-when-switching-php-versions
 
@@ -10,7 +10,7 @@ class soapConnector extends baseConnector {
   protected 
     $endpoint = NULL,
     $adaptor_defaults = [
-      'soap_client' => '\RoyalMail\Connector\TDSoapClient',
+      'soap_client' => '\TranslAPI\Connector\TDSoapClient',
     ],
 
     $request_input = [];
@@ -30,7 +30,7 @@ class soapConnector extends baseConnector {
    * 
    * @see baseConnector::doRequest()
    * 
-   * @return \RoyalMail\Response\baseResponse Response class for the request sent.
+   * @return \TranslAPI\Response\baseResponse Response class for the request sent.
    */
   function doRequest($action, $params = [], $config = []) {
     $this->request_input = ['action' => $action, 'parameters' => $params];
@@ -95,7 +95,7 @@ class soapConnector extends baseConnector {
   /**
    * Make sure the response from the RM API seems kosher
    * 
-   * @throws \RoyalMail\Exception\ResponseException
+   * @throws \TranslAPI\Exception\ResponseException
    */
   protected function verifyResponse($response) {
     // Verify WS security values.

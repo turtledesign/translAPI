@@ -1,14 +1,14 @@
 <?php
 
-namespace RoyalMail\tests\unit\Response;
+namespace TranslAPI\tests\unit\Response;
 
 use atoum;
-use \RoyalMail\Response\Interpreter as Inter;
+use \TranslAPI\Response\Interpreter as Inter;
 use \Symfony\Component\Yaml\Yaml;
 
 class Interpreter extends atoum {
 
-  use \RoyalMail\tests\lib\TestDataLoader;
+  use \TranslAPI\tests\lib\TestDataLoader;
 
 
   function testSuccessResponses() {

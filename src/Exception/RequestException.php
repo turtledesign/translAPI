@@ -1,8 +1,8 @@
 <?php
 
-namespace RoyalMail\Exception;
+namespace TranslAPI\Exception;
 
-class RequestException extends RoyalMailException {
+class RequestException extends TranslAPIException {
 
 
 }

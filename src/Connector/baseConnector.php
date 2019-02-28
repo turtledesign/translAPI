@@ -1,6 +1,6 @@
 <?php
 
-namespace RoyalMail\Connector;
+namespace TranslAPI\Connector;
 
 abstract class baseConnector {
 

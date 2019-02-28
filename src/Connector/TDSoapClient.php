@@ -1,6 +1,6 @@
 <?php
 
-namespace RoyalMail\Connector;
+namespace TranslAPI\Connector;
 
 class TDSoapClient extends \SoapClient {
 

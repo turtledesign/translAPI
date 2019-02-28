@@ -1,12 +1,12 @@
 <?php
 
 
-namespace RoyalMail\tests\lib;
+namespace TranslAPI\tests\lib;
 
 define('ENDPOINT', MODULE_ROOT . 'reference/ShippingAPI_V2_0_9.wsdl');
 
 
-use \RoyalMail\Connector\MockSoapClient as MockSoap;
+use \TranslAPI\Connector\MockSoapClient as MockSoap;
 
 /**
  * Utility to pre-parse YAML request test files to add valid dates and similar.
@@ -30,7 +30,7 @@ trait TestDataLoader {
 
 
   function getDevelopmentHelper($config = []) {
-    if (empty($this->development_helper)) $this->development_helper = new \RoyalMail\Helper\Development($config);
+    if (empty($this->development_helper)) $this->development_helper = new \TranslAPI\Helper\Development($config);
 
     return $this->development_helper;
   }

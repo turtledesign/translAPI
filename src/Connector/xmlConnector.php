@@ -1,8 +1,8 @@
-<?php namespace RoyalMail\Connector;
+<?php namespace TranslAPI\Connector;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use \RoyalMail\Helper\Xml as XmlHelper;
+use \TranslAPI\Helper\Xml as XmlHelper;
 
 class xmlConnector extends baseConnector {
 

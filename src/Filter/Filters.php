@@ -1,8 +1,8 @@
 <?php
 
-namespace RoyalMail\Filter;
+namespace TranslAPI\Filter;
 
-use \RoyalMail\Exception\StructureSkipFieldException as SkipException;
+use \TranslAPI\Exception\StructureSkipFieldException as SkipException;
 
 /**
  * The validator also needs to 'use'ed before this as the skip filter calls its methods.

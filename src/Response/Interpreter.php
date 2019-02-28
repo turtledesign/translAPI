@@ -1,16 +1,16 @@
 <?php
 
-namespace RoyalMail\Response;
+namespace TranslAPI\Response;
 
 
 use \Symfony\Component\Yaml\Yaml;
-use \RoyalMail\Exception\StructureSkipFieldException as SkipException;
+use \TranslAPI\Exception\StructureSkipFieldException as SkipException;
 
 class Interpreter extends \ArrayObject {
   
-  use \RoyalMail\Validator\Validates;
-  use \RoyalMail\Filter\Filters;
-  use \RoyalMail\Helper\Structure;
+  use \TranslAPI\Validator\Validates;
+  use \TranslAPI\Filter\Filters;
+  use \TranslAPI\Helper\Structure;
 
   protected 
     $response_instance = NULL,
@@ -64,7 +64,7 @@ class Interpreter extends \ArrayObject {
 
 
   function loadResponse($key, $response, $helper = []) {
-    if ($response instanceof \RoyalMail\Exception\ResponseException) return $this->connectionError($response);
+    if ($response instanceof \TranslAPI\Exception\ResponseException) return $this->connectionError($response);
 
     $this->response_instance = $response;
     $this->response_schema   = self::getResponseSchema($key);

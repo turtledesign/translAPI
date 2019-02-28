@@ -1,11 +1,11 @@
 <?php
 
-namespace RoyalMail\tests\unit\Validator;
+namespace TranslAPI\tests\unit\Validator;
 
 use atoum;
 
 class Validates extends atoum {
-  use \RoyalMail\Validator\Validates;
+  use \TranslAPI\Validator\Validates;
 
 
   function testMultipleValidations() {

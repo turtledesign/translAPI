@@ -1,6 +1,6 @@
 <?php
 
-namespace RoyalMail\Validator;
+namespace TranslAPI\Validator;
 
 
 use \Valitron\Validator;
@@ -288,7 +288,7 @@ trait Validates {
     $v->rules($rules);
 
     if (! $v->validate()) {
-      if ($throw) throw (new \RoyalMail\Exception\RequestException())->withErrors($v->errors());
+      if ($throw) throw (new \TranslAPI\Exception\RequestException())->withErrors($v->errors());
 
       return $v->errors();
     
@@ -303,12 +303,12 @@ trait Validates {
    * @param array $params
    * @param array $defaults
    * 
-   * @throws \RoyalMail\Exception\ValidatorException
+   * @throws \TranslAPI\Exception\ValidatorException
    */
   static function fail($value, $params, $defaults = []) {
     $params   = array_merge(['message' => 'value is invalid'], $defaults, $params);
     $show_val = is_scalar($value) ? ' [' . $value . ']' : '';
 
-    throw new \RoyalMail\Exception\ValidatorException($params['message'] . $show_val);
+    throw new \TranslAPI\Exception\ValidatorException($params['message'] . $show_val);
   }
 }

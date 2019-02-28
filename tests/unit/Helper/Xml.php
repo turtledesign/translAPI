@@ -1,7 +1,7 @@
-<?php namespace RoyalMail\tests\unit\Helper;
+<?php namespace TranslAPI\tests\unit\Helper;
 
 use atoum;
-use \RoyalMail\Helper\Xml as XmlHelper;
+use \TranslAPI\Helper\Xml as XmlHelper;
 use \Symfony\Component\Yaml\Yaml;
 
 class Xml extends atoum {

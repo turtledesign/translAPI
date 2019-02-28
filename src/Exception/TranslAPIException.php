@@ -1,8 +1,8 @@
 <?php
 
-namespace RoyalMail\Exception;
+namespace TranslAPI\Exception;
 
-abstract class RoyalMailException extends \Exception {
+abstract class TranslAPIException extends \Exception {
 
   protected $error_list = [];
 

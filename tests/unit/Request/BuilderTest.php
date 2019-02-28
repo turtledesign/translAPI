@@ -1,15 +1,15 @@
 <?php
 
-namespace RoyalMail\tests\unit\Request;
+namespace TranslAPI\tests\unit\Request;
 
 use atoum;
-use \RoyalMail\Request\Builder as ReqBuilder;
+use \TranslAPI\Request\Builder as ReqBuilder;
 use \Symfony\Component\Yaml\Yaml;
-use \RoyalMail\Helper\Xml as XmlHelper;
+use \TranslAPI\Helper\Xml as XmlHelper;
 
 class Builder extends atoum {
 
-  use \RoyalMail\tests\lib\TestDataLoader;
+  use \TranslAPI\tests\lib\TestDataLoader;
 
   function testValueDefaulting() {
     $this->string(ReqBuilder::processSingleProperty(['_default' => 'foo'], @$not_defined))->isEqualTo('foo');
@@ -35,7 +35,7 @@ class Builder extends atoum {
 
 
   function testCancelRequest() {
-    $helper  = new \RoyalMail\Helper\Data(['override_defaults' => ['_disable_includes' => FALSE]]);
+    $helper  = new \TranslAPI\Helper\Data(['override_defaults' => ['_disable_includes' => FALSE]]);
     $setup   = $this->getTestSchema('requests/cancelJob');
 
     $valid = $setup['valid'];
@@ -48,7 +48,7 @@ class Builder extends atoum {
 
 
   function testCreateRequest() {
-    $helper  = new \RoyalMail\Helper\Data(['override_defaults' => ['_disable_includes' => FALSE]]);
+    $helper  = new \TranslAPI\Helper\Data(['override_defaults' => ['_disable_includes' => FALSE]]);
     $setup   = $this->getTestSchema('requests/createNewJob');
 
     $valid = $setup['valid'];

@@ -1,10 +1,10 @@
 <?php
 
-namespace RoyalMail\tests\unit\Connector;
+namespace TranslAPI\tests\unit\Connector;
 
 use atoum;
 use \Symfony\Component\Yaml\Yaml;
-use \RoyalMail\Connector\xmlConnector as xmlCon;
+use \TranslAPI\Connector\xmlConnector as xmlCon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;

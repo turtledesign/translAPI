@@ -1,4 +1,4 @@
-<?php namespace RoyalMail\Helper;
+<?php namespace TranslAPI\Helper;
 
 // TODO: Would probably make sense to remove the dependency on Sabre as we're only making use of a very small part of it & could elide out the conversion.
 

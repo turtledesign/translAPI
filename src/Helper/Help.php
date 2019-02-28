@@ -1,6 +1,6 @@
 <?php
 
-namespace RoyalMail\Helper;
+namespace TranslAPI\Helper;
 
 use \Symfony\Component\Yaml\Yaml;
 

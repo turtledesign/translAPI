@@ -1,16 +1,16 @@
-<?php namespace RoyalMail;
+<?php namespace TranslAPI;
 
 if (! defined('MODULE_ROOT')) define('MODULE_ROOT', dirname(__FILE__) . '/../');
 
 
-use \RoyalMail\Connector\xmlConnector  as Connector;
-use \RoyalMail\Helper\Data             as Store;
-use \RoyalMail\Helper\Development      as DevHelper;
-use \RoyalMail\Request\Builder         as Builder;
-use \RoyalMail\Response\Interpreter    as Interpreter;
+use \TranslAPI\Connector\xmlConnector  as Connector;
+use \TranslAPI\Helper\Data             as Store;
+use \TranslAPI\Helper\Development      as DevHelper;
+use \TranslAPI\Request\Builder         as Builder;
+use \TranslAPI\Response\Interpreter    as Interpreter;
 
 
-class RoyalMail {
+class TranslAPI {
 
   /**
    * Create New
@@ -20,17 +20,6 @@ class RoyalMail {
    */
   function __construct($args = []) {
   }
-
-
-  function createNewJob($params, $config = []) {
-    return $this->processAction('createNewJob', $params, $config);
-  }
-
-
-  function cancelJob($params, $config = []) {
-    return $this->processAction('cancelJob', $params, $config);
-  }
-
 
   function processAction($action, $params, $config = []) {
     return  $this->interpretResponse($action,

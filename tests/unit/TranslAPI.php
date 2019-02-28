@@ -1,9 +1,9 @@
 <?php
 
-namespace RoyalMail\tests\unit;
+namespace TranslAPI\tests\unit;
 
 use atoum;
-use \RoyalMail\RoyalMail as Service;
+use \TranslAPI\TranslAPI as Service;
 use \Symfony\Component\Yaml\Yaml;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -13,9 +13,9 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
 
-class RoyalMail extends atoum {
+class TranslAPI extends atoum {
 
-  use \RoyalMail\tests\lib\TestDataLoader;
+  use \TranslAPI\tests\lib\TestDataLoader;
 
 
   function testBuild() {

@@ -1,19 +1,17 @@
 {
-  "name": "turtledesign/royalmail-php",
-  "description": "PHP module for interfacing with the Royal Mail shipping api : http://www.royalmail.com/corporate/services/shipping-api ",
+  "name": "turtledesign/translAPI",
+  "description": "PHP SDK for interfacing with APIs via YAML configuration.",
   "license": "MIT",
   "type": "library",
   "keywords": [
-    "shipping",
-    "postage",
-    "royal-mail",
-    "post-office",
-    "barcodes"
+    "api",
+    "php",
+    "yaml",
   ],
 
   "autoload": {
     "psr-4": {
-      "RoyalMail\\": "src/"
+      "TranslAPI\\": "src/"
     }
   },
 

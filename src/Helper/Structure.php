@@ -1,8 +1,8 @@
 <?php
 
-namespace RoyalMail\Helper;
+namespace TranslAPI\Helper;
 
-use \RoyalMail\Exception\StructureSkipFieldException as SkipException;
+use \TranslAPI\Exception\StructureSkipFieldException as SkipException;
 
 
 trait Structure {
@@ -12,10 +12,10 @@ trait Structure {
     try {
       $val = self::processProperty($schema, $val, $defaults, $helper);
 
-    } catch (\RoyalMail\Exception\ValidatorException $e) {
+    } catch (\TranslAPI\Exception\ValidatorException $e) {
       $errors[] = $key . ': ' . $e->getMessage(); 
 
-    } catch (\RoyalMail\Exception\RequestException $re) {
+    } catch (\TranslAPI\Exception\RequestException $re) {
       foreach ($re->getErrors() as $k_nested => $v) $errors[$k . ':' . $k_nested] = $v;
     
     } catch (SkipException $e) { return $arr; } // Exception is notification that rules exclude this field.

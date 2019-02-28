@@ -1,4 +1,4 @@
-<?php namespace RoyalMail\Request;
+<?php namespace TranslAPI\Request;
 
 use \Symfony\Component\Yaml\Yaml;
 
@@ -8,9 +8,9 @@ use \Symfony\Component\Yaml\Yaml;
  * 
  */
 class Builder {
-  use \RoyalMail\Validator\Validates;
-  use \RoyalMail\Filter\Filters;
-  use \RoyalMail\Helper\Structure;
+  use \TranslAPI\Validator\Validates;
+  use \TranslAPI\Filter\Filters;
+  use \TranslAPI\Helper\Structure;
 
 
   /**
@@ -33,7 +33,7 @@ class Builder {
    * @param array $schema instructions for processing the params.
    * @param array $params values to work with
    * 
-   * @throws \RoyalMail\Exception\RequestException on validation failure with details of all failing field values.
+   * @throws \TranslAPI\Exception\RequestException on validation failure with details of all failing field values.
    * 
    * @return array values structured for API request.
    */
@@ -52,14 +52,14 @@ class Builder {
         $built = self::addProperty($built, $schema['properties'][$k], $k, @$params[$k], $schema['defaults'], $helper);
       }
     
-    } catch (\RoyalMail\Exception\ValidatorException $e) {
+    } catch (\TranslAPI\Exception\ValidatorException $e) {
       $errors[$k] = $k . ': ' . $e->getMessage(); 
 
-    } catch (\RoyalMail\Exception\RequestException $re) {
+    } catch (\TranslAPI\Exception\RequestException $re) {
       foreach ($re->getErrors() as $k_nested => $v) $errors[$k . ':' . $k_nested] = $v;
     }
 
-    if (! empty($errors)) throw (new \RoyalMail\Exception\RequestException())->withErrors($errors);
+    if (! empty($errors)) throw (new \TranslAPI\Exception\RequestException())->withErrors($errors);
 
     if (defined('PHP_MAJOR_VERSION') && PHP_MAJOR_VERSION > 5) $built = self::derefArray($built);
 

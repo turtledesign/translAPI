@@ -1,9 +1,9 @@
 <?php
 
-namespace RoyalMail\Helper;
+namespace TranslAPI\Helper;
 
 use \Symfony\Component\Yaml\Yaml;
-use \RoyalMail\Request\Builder as ReqBuilder;
+use \TranslAPI\Request\Builder as ReqBuilder;
 
 define('SCHEMA_DIR',  MODULE_ROOT . 'tests/resources');
 
@@ -18,7 +18,7 @@ class Development {
 
 
   function getTestRequest($req, $with_response = FALSE) {
-    $built = ReqBuilder::build($req, $this->getSampleRequest($req), new \RoyalMail\Helper\Data());
+    $built = ReqBuilder::build($req, $this->getSampleRequest($req), new \TranslAPI\Helper\Data());
 
     return ($with_response) ? ['request'  => $built, 'response' => $this->getSampleRequest($req, 'response')] : $built;
   }
