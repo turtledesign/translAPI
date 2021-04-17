@@ -6,7 +6,7 @@
   "keywords": [
     "api",
     "php",
-    "yaml",
+    "yaml"
   ],
 
   "autoload": {
