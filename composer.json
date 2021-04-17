@@ -1,5 +1,5 @@
 {
-  "name": "turtledesign/translAPI",
+  "name": "turtledesign/translapi",
   "description": "PHP SDK for interfacing with APIs via YAML configuration.",
   "license": "MIT",
   "type": "library",
@@ -25,9 +25,9 @@
   "require": {
     "php":             ">=5.4.0",
     "symfony/yaml":    ">=2.7",
-    "vlucas/valitron": "~1.2",
+    "vlucas/valitron": "~1.4",
     "sabre/xml": "^1.5 || ^2.1",
-    "guzzlehttp/guzzle": "^6.3"
+    "guzzlehttp/guzzle": "^7.3"
   },
 
   "require-dev": {
